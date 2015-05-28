@@ -1,0 +1,27 @@
+#map-canvas {
+  height: 2000px;*/
+  margin-top: -10px;
+  margin: 0 auto;
+}
+
+.controls {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 32px;
+        margin-left: 120px;
+        margin-top: 5px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+}
+
+.controls:focus {
+  border-color: #4d90fe;
+}
