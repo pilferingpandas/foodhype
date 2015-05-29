@@ -1,0 +1,3 @@
+how to turn jsx into js:
+
+jsx --extension jsx client/components/ client/dist/
