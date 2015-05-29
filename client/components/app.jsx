@@ -1,7 +1,7 @@
 // The order of this file matters!
   // 1. All React components are created
   // 2. The AppView is rendered
-  // 3. The Google Map is rendered
+  // 3. The Google Map is rendered 
 
 //////////////////////////
 /// React Views        ///
