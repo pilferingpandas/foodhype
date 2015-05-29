@@ -1,4 +1,4 @@
-//The order of this file matters!
+// The order of this file matters!
   // 1. All React components are created
   // 2. The AppView is rendered
   // 3. The Google Map is rendered
@@ -7,10 +7,10 @@
 /// React Views        ///
 //////////////////////////
 
-//Creates a View for the whole app, with only two things in it: a single WindowView, and the map canvas.
+// Creates a View for the whole app, with only two things in it: a single WindowView, and the map canvas
 var AppView = React.createClass({
   getInitialState: function() {
-    //Fakey data
+    // Fakey data
     return {
       selectedMarkerData: {
         name: "The Melt",
@@ -19,9 +19,10 @@ var AppView = React.createClass({
       }
     }
   },
+
   render: function() {
-    //Every React component needs a single DOM element to wrap all its html. In this case it's <div id="wrapper">
-      //The WindowView component will be updated with data associated with a clicked marker
+    // Every React component needs a single DOM element to wrap all its html. In this case it's <div id="wrapper">
+      // The WindowView component will be updated with data associated with a clicked marker
     return (
       <div id="wrapper">
         <h1>Food Hyped</h1>
@@ -35,7 +36,7 @@ var AppView = React.createClass({
   }
 });
 
-//Creates a View for the browser window
+// Creates a View for the browser window
 var WindowView = React.createClass({
   render: function() {
     return (
@@ -48,7 +49,7 @@ var WindowView = React.createClass({
   }
 });
 
-//Renders the whole application
+// Renders the whole application
 React.render(
   <AppView />,
   document.getElementById('AppView')
@@ -91,10 +92,10 @@ var options = {
 var input = document.getElementById('pac-input');
 
 // Create the autocomplete object
-// allow the user to search
-// for and select a place. The sample then displays an info window containing
-// the place ID and other information about the place that the user has
-// selected
+  // allow the user to search
+  // for and select a place. The sample then displays an info window containing
+  // the place ID and other information about the place that the user has
+  // selected
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 
 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
