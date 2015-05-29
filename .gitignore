@@ -35,5 +35,4 @@ bower_components/
 .flooignore
 
 # Contain keys and sensitive information to avoid publishing to github
-index.html
 panda-config.js
