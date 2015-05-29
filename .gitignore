@@ -34,6 +34,6 @@ bower_components/
 .floo
 .flooignore
 
-# Contain keys to avoid publishing to github
+# Contain keys and sensitive information to avoid publishing to github
 index.html
-twitter.js
+panda-config.js

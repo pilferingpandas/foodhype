@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 // Opens a connection to the test database on our locally running instance of MongoDB
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://pilferingpandas:pandaexpress17@ds037272.mongolab.com:37272/pilferingpandas');
 
 // There is a pending connection to the test database running on localhost
 // Notify if we connect successfully or if a connection error occurs
