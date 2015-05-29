@@ -13,9 +13,14 @@ var AppView = React.createClass({
     // Fakey data
     return {
       selectedMarkerData: {
+        display: true,
         name: "The Melt",
-        location: "Someplace",
-        rating: 10
+        picture:'http://aht.seriouseats.com/images/2012/04/20120427-bk-japan-ringo-burger-product-shot.jpg',
+        location: "115 New Montgomery St,\nSan Francisco, CA 94105",
+        rating: 56,
+        yelpUrl: 'http://www.yelp.com/biz/the-melt-new-montgomery-san-francisco',
+        twitterUrl: 'https://twitter.com/search?q=%22the%20melt%22%20%3A%29&geocode=37.7880000,-122.3998380,15km',
+        tripadvisorUrl: 'http://www.tripadvisor.com/Restaurant_Review-g60713-d4834219-Reviews-The_Melt-San_Francisco_California.html'
       }
     }
   },
@@ -25,8 +30,8 @@ var AppView = React.createClass({
       // The WindowView component will be updated with data associated with a clicked marker
     return (
       <div id="wrapper">
-        <h1>Food Hyped</h1>
-        <input id="pac-input" class="controls" type="text" placeholder="Start typing here"></input>
+        <h1 id="title">Food Hyped</h1>
+        <input id="pac-input" className="controls" type="text" placeholder="Start typing here"></input>
 
         <WindowView data={this.state.selectedMarkerData} />
         
@@ -39,21 +44,28 @@ var AppView = React.createClass({
 // Creates a View for the browser window
 var WindowView = React.createClass({
   render: function() {
+    if(this.props.data.display === false) {return(<div></div>);}
     return (
-      <div> 
-        This is {this.props.data.name} <br/>
-        Its at {this.props.data.location} <br/>
-        Rating: {this.props.data.rating}
+      <div id="window"> 
+        <div id="windowTitle">{this.props.data.name}</div>
+        <img id="windowPicture" src={this.props.data.picture}></img>
+        <div>Its at {this.props.data.location} </div>
+        <div id="windowScore">{this.props.data.rating}</div>
+        <a href={this.props.data.yelpUrl}><button className="linkButton" id="yelp"></button></a>
+        <a href={this.props.data.yelpUrl}><button className="linkButton" id="twitter"></button></a>
+        <a href={this.props.data.yelpUrl}><button className="linkButton" id="tripadvisor"></button></a>
       </div>
     )
   }
 });
+
 
 // Renders the whole application
 React.render(
   <AppView />,
   document.getElementById('AppView')
 );
+
 
 //////////////////////////
 /// Map Initialization ///
