@@ -34,5 +34,6 @@ bower_components/
 .floo
 .flooignore
 
-# Keys to avoid publishing to github
+# Contain keys to avoid publishing to github
 index.html
+twitter.js
