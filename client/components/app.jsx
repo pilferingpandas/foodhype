@@ -24,7 +24,6 @@ var AppView = React.createClass({
       }
     }
   },
-
   render: function() {
     // Every React component needs a single DOM element to wrap all its html. In this case it's <div id="wrapper">
       // The WindowView component will be updated with data associated with a clicked marker
@@ -43,6 +42,12 @@ var AppView = React.createClass({
 
 // Creates a View for the browser window
 var WindowView = React.createClass({
+  componentDidMount: function() {
+    window.addEventListener('', this.handleMarkerClick);
+  },
+  handleMarkerClick: function() {
+    return (<div></div>)
+  },
   render: function() {
     if(this.props.data.display === false) {return(<div></div>);}
     return (
@@ -67,6 +72,23 @@ React.render(
 );
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////
 /// Map Initialization ///
 //////////////////////////
@@ -74,7 +96,7 @@ React.render(
 // Creates new map
 var map;
 
-// Add markers for the search box
+// List of all markers
 var markers = [];
 
 // Sets starting point for rendering to San Francisco, CA
@@ -82,21 +104,22 @@ var myLatLng = new google.maps.LatLng(37.7749300, -122.4194200);
 
 // Uses center for starting point and zoom when page loads
 var mapOptions = {
-  center: myLatLng,
-  zoom: 14
+ center: myLatLng,
+ zoom: 14
 };
 
 // Renders new map
 map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
+console.log('hi');
 // Set the default bounds for the autocomplete search results
-  // This will bias the search results to the entire globe using the coordinates listed below
+ // This will bias the search results to the entire globe using the coordinates listed below
 var defaultBounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(-90, -180),
-  new google.maps.LatLng(90, 180));
+ new google.maps.LatLng(-90, -180),
+ new google.maps.LatLng(90, 180));
 
 var options = {
-  bounds: defaultBounds
+ bounds: defaultBounds
 };
 
 // Create the search box and link it to the UI element
@@ -104,12 +127,54 @@ var options = {
 var input = document.getElementById('pac-input');
 
 // Create the autocomplete object
-  // allow the user to search
-  // for and select a place. The sample then displays an info window containing
-  // the place ID and other information about the place that the user has
-  // selected
+ // allow the user to search
+ // for and select a place. The sample then displays an info window containing
+ // the place ID and other information about the place that the user has
+ // selected
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 
 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
+// Create infowindow
 var infowindow = new google.maps.InfoWindow();
+
+// Create the searchbox and link it to the UI element
+var searchBox = new google.maps.places.SearchBox(input);
+
+// Listen for the event fired when the user selects an item from the 
+// pick list. Retrieve the matching places for that item
+google.maps.event.addListener(searchBox, 'places_changed', function() {
+
+  var places = searchBox.getPlaces();
+
+  console.log(places);
+
+  if (places.length === 0) {
+    return;
+  }
+  for (var i = 0, marker; marker = markers[i]; i++) {
+    marker.setMap(null);
+  }
+  for (var i = 0, marker; marker = markers[i]; i++) {
+    marker = undefined;
+  }
+  
+  for(var i = 0; i < places.length; i++) {
+    bounds.extend(place.geometry.location);
+    map.fitBounds(bounds); 
+  }
+});
+google.maps.event.addListener(map, 'bounds_changed', function() {
+ var bounds = map.getBounds();
+ searchBox.setBounds(bounds);
+});
+
+// Add a marker to the map and push to the array.
+function addMarker(location, markerData) {
+  var marker = new google.maps.Marker(markerData);
+  markers.push(marker);
+}
+
+
+// // Bias the SearchBox results towards places that are within the bounds of the 
+//  // current map's viewport
