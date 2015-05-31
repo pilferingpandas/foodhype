@@ -9,18 +9,32 @@
 
 // Creates a View for the whole app, with only two things in it: a single WindowView, and the map canvas
 var AppView = React.createClass({
+  componentDidMount: function() {
+    $(document).on('markerClick', this.handleMarkerClick);
+  },
+  handleMarkerClick: function(e, data) {
+    console.log(data);
+    this.setState({
+      selectedMarkerData:{
+        name: data.name,
+        display: true,
+        location: data.address[0]
+      }
+    });
+    this.render();
+  },
   getInitialState: function() {
     // Fakey data
     return {
       selectedMarkerData: {
-        display: true,
-        name: "The Melt",
-        picture:'http://aht.seriouseats.com/images/2012/04/20120427-bk-japan-ringo-burger-product-shot.jpg',
-        location: "115 New Montgomery St,\nSan Francisco, CA 94105",
-        rating: 56,
-        yelpUrl: 'http://www.yelp.com/biz/the-melt-new-montgomery-san-francisco',
-        twitterUrl: 'https://twitter.com/search?q=%22the%20melt%22%20%3A%29&geocode=37.7880000,-122.3998380,15km',
-        tripadvisorUrl: 'http://www.tripadvisor.com/Restaurant_Review-g60713-d4834219-Reviews-The_Melt-San_Francisco_California.html'
+        display: false,
+        // name: "The Melt"
+        // picture:'http://aht.seriouseats.com/images/2012/04/20120427-bk-japan-ringo-burger-product-shot.jpg',
+        // location: "115 New Montgomery St,\nSan Francisco, CA 94105",
+        // rating: 56,
+        // yelpUrl: 'http://www.yelp.com/biz/the-melt-new-montgomery-san-francisco',
+        // twitterUrl: 'https://twitter.com/search?q=%22the%20melt%22%20%3A%29&geocode=37.7880000,-122.3998380,15km',
+        // tripadvisorUrl: 'http://www.tripadvisor.com/Restaurant_Review-g60713-d4834219-Reviews-The_Melt-San_Francisco_California.html'
       }
     }
   },
@@ -42,13 +56,6 @@ var AppView = React.createClass({
 
 // Creates a View for the browser window
 var WindowView = React.createClass({
-  componentDidMount: function() {
-    window.addEventListener('', this.handleMarkerClick);
-  },
-  handleMarkerClick: function() {
-    this.props.data = {};
-    render();
-  },
   render: function() {
     if(this.props.data.display === false) {return(<div></div>);}
     return (
