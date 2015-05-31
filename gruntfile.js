@@ -1,5 +1,6 @@
 // Commands:
   // grunt test
+    // build app.js
     // mocha
     // jshint
   // grunt build
@@ -59,7 +60,7 @@ module.exports = function(grunt) {
     // Testing
 
     jshint: {
-      files: ['client/dist/<%= pkg.name %>.js'],
+      files: ['client/scripts/*.js', 'client/components/*.js'],
       options: {
         force: 'true',
         jshintrc: 'test/.jshintrc',
@@ -161,7 +162,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest','jshint'
+    'react', 'mochaTest','jshint'
   ]);
 
   grunt.registerTask('build', [
