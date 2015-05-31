@@ -136,6 +136,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-react');
 
   grunt.registerTask('server-dev', function (target) {
+    grunt.task.run([ 'build' ]);
+    
     // Running nodejs in a different process and displaying output on the main console
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
