@@ -10,14 +10,7 @@ app.use(favicon(__dirname + '/client/favicon/favicon.ico'));
 
 
 
-var yelp = require("yelp").createClient({
-  consumer_key: keys.yelp.consumer_key,
-  consumer_secret: keys.yelp.consumer_secret,
-  token: keys.yelp.token,
-  token_secret: keys.yelp.token_secret,
-  ssl: true
-
-});
+var yelp = require("yelp").createClient(keys.yelp);
 
 var returnNum = 10;
 var allBizs;
@@ -45,16 +38,16 @@ app.get('/yelpresults.html', function(req, res) {
   // search san francisco for all food restaurants
   yelp.search({term: "food", location: "San Francisco", limit: returnNum}, function(error, data) {
     if (!error) {
-      
+
       allBizs = [];
 
       var biz = data.businesses;
-  
- 
+
+
       for (var i = 0; i < biz.length; i++) {
            //console.log('yelp id for restaurant #' + i + '- ' + biz[i].name + ': ' + biz[i].id);
         // once we have a list of restaurants we want to make yelp api requests for each restaurant individually to get more info
-        yelp.business( biz[i].id, function(error, business) {  
+        yelp.business( biz[i].id, function(error, business) {
 
        allBizs.push({
         name: business.name,
