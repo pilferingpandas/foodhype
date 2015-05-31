@@ -26,6 +26,8 @@ body{
   top:90px;
   right:50px;
 
+  z-index: 2;
+
 }
 #window:focus {
 

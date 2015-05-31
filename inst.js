@@ -1,4 +1,4 @@
-var keys = require('./panda-config.js');
+var keys = require('./config/panda-config.js');
 var express = require('express');
 var app = require('./server.js')
 var instagram = require('instagram-node-lib');

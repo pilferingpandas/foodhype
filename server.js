@@ -3,7 +3,7 @@ var favicon = require('serve-favicon');
 var app = express();
 var inst = require('./inst.js')
 var fs = require('fs');
-var keys = require('./panda-config.js');
+var keys = require('./config/panda-config.js');
 
 app.use(express.static(__dirname + '/client'));
 app.use(favicon(__dirname + '/client/favicon/favicon.ico'));
@@ -31,7 +31,7 @@ var handleBizs = function(res) {
 
 }
 
-app.get('/yelpresults.html', function(req, res) {
+app.get('/yelpresults', function(req, res) {
 
 
 

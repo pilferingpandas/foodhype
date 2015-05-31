@@ -3,7 +3,7 @@
     // mocha
     // jshint
   // grunt build
-    // react: components/app.jsx turns into dist/app.js
+    // react: components/*.jsx turns into components/*.js
     // concat: dist/app.js turns into dist/foodhyped.js
     // uglify: dist/foodhyped.js turns into dist/foodhyped.min.js
     // cssmin: styles/styles.css turns into dist/style.min.css
@@ -20,12 +20,22 @@ module.exports = function(grunt) {
 
     // Building
 
+    react: {
+      files: {
+        expand: true,
+        cwd: 'client/components',
+        src: ['**/*.jsx'],
+        dest: 'client/components/',
+        ext: '.js'
+      }
+    },
+
     concat: {
       options: {
         separator: ';'
       },
       dist: {
-        src: ['./client/dist/app.js'],
+        src: ['./client/components/*.js', './client/scripts/*.js'],
         dest: './client/dist/<%= pkg.name %>.js'
       }
     },
@@ -45,16 +55,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
-  react: {
-    files: {
-      expand: true,
-      cwd: 'client/components',
-      src: ['**/*.jsx'],
-      dest: 'client/dist',
-      ext: '.js'
-    }
-  },
 
     // Testing
 
@@ -83,7 +83,8 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'client/components/*.jsx'
+          'client/components/*.jsx',
+          'client/scripts/*.js'
         ],
         tasks: [
           'react',
@@ -148,6 +149,11 @@ module.exports = function(grunt) {
     nodemon.stderr.pipe(process.stderr);
 
     grunt.task.run([ 'watch' ]);
+  });
+
+  // Just a shortcut for server-dev
+  grunt.registerTask('s', function(target){
+    grunt.task.run(['server-dev']);
   });
 
   ////////////////////////////////////////////////////
