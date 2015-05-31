@@ -31,7 +31,7 @@ var handleBizs = function(res) {
 
 }
 
-app.get('/yelpresults.html', function(req, res) {
+app.get('/yelpresults', function(req, res) {
 
 
 
