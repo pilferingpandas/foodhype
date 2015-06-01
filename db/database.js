@@ -13,4 +13,9 @@ db.once('open', function() {
     console.log('Mongodb connection is open');
 });
 
+db.insertRestaurantData = function(data) {
+  // It's already formatted for the restaurantSchema
+
+}
+
 module.exports = db;

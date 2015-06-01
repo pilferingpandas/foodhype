@@ -192,6 +192,8 @@ var getRestaurants = function() {
       makeMarker(i);
     }
 
+
+  //May animate this later.
     // var makeMarkerWithTimeout = function(markerIndex) {
     //   window.setTimeout(function() {
     //     var marker = new google.maps.Marker({
@@ -223,7 +225,6 @@ var getRestaurants = function() {
   var markerClickHandler = function(e) {
     for(var i = 0; i < window.markers.length; i++) {
       if(e.latLng === window.markers[i].getPosition()) {
-        // $(window).trigger('markerClick', window.markers[i].data);
         $(document).trigger('markerClick', [window.markers[i].data]);
       }
     }
