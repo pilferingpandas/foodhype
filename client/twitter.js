@@ -1,15 +1,14 @@
-// Search for the tweets
-client.get('search/tweets', {q: 'node.js'}, function(error, tweets, response) {
-  console.log(tweets);
-});
-
 var Twitter = require('twitter');
 
 var client = new Twitter(require('../config/panda-config.js').twitter);
 
-client.get(path, params, callback);
-client.post(path, params, callback);
-client.stream([path, params, callback]);
+// Search for the tweets
+var params = {q: 'restaurant%20%3A)&geocode=37.7880000,-122.3998380,15km&lang=en&result_type=recent&src=typd'};
 
-
-
+client.get('https://api.twitter.com/1.1/search/tweets.json', params, function(error, tweets, response) {
+ if (error) {
+   console.log(error);
+ } else {
+   console.log(tweets);
+ }
+});
