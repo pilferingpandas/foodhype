@@ -13,7 +13,7 @@ var AppView = React.createClass({
     $(document).on('markerClick', this.handleMarkerClick);
   },
   handleMarkerClick: function(e, data) {
-    console.log(data);
+    //If the user clicks on a marker, update the state, which gets passed to the window view.
     this.setState({
       selectedMarkerData:{
         name: data.name,

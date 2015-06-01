@@ -10,7 +10,8 @@ var restaurantSchema = mongoose.Schema({
   address: String,
   latitude: Number, // TODO: determine if we need to calculate decimals and to what number do we round after the deimal point
   longitude: Number // TODO: determine if we need to calculate decimals and to what number do we round after the deimal point
-  //google places api query string?
+  // google places api query string?
+  // twitter search string?
 });
 
 var Restaurant = mongoose.model('Restuarant', restaurantSchema);

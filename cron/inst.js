@@ -14,3 +14,20 @@ instagram.set('client_secret', keys.instagram.client_secret);
     //console.log(data);
     }
   });
+
+// Fill me out!
+module.exports = {
+  getApiData : function(thisYelpData, callback) {
+    // Contact the API with thisYelpData, then...
+
+    callback(dataReturnedFromApi);
+  }
+}
+
+// format: 
+// dataReturnedFromApi.numPics
+//   ^ number of pictures
+// dataReturnedFromApi.bestPicture
+//   ^ url of whatever the best picture is
+// dataReturnedFromApi.url
+//   ^ url of instagram results (is this possible?)
