@@ -8,7 +8,7 @@
 //////////////////////////
 
 // Creates a View for the whole app, with only two things in it: a single WindowView, and the map canvas
-var AppView = React.createClass({
+var AppView = React.createClass({displayName: "AppView",
   componentDidMount: function() {
     $(document).on('markerClick', this.handleMarkerClick);
   },
@@ -42,32 +42,32 @@ var AppView = React.createClass({
     // Every React component needs a single DOM element to wrap all its html. In this case it's <div id="wrapper">
       // The WindowView component will be updated with data associated with a clicked marker
     return (
-      <div id="wrapper">
-        <h1 id="title">Food Hyped</h1>
-        <input id="pac-input" className="controls" type="text" placeholder="Start typing here"></input>
+      React.createElement("div", {id: "wrapper"}, 
+        React.createElement("h1", {id: "title"}, "Food Hyped"), 
+        React.createElement("input", {id: "pac-input", className: "controls", type: "text", placeholder: "Start typing here"}), 
 
-        <WindowView data={this.state.selectedMarkerData} />
+        React.createElement(WindowView, {data: this.state.selectedMarkerData}), 
         
-        // <div id="map-canvas"></div>
-      </div>
+        "// ", React.createElement("div", {id: "map-canvas"})
+      )
     )
   }
 });
 
 // Creates a View for the browser window
-var WindowView = React.createClass({
+var WindowView = React.createClass({displayName: "WindowView",
   render: function() {
-    if(this.props.data.display === false) {return(<div></div>);}
+    if(this.props.data.display === false) {return(React.createElement("div", null));}
     return (
-      <div id="window"> 
-        <div id="windowTitle">{this.props.data.name}</div>
-        <img id="windowPicture" src={this.props.data.picture}></img>
-        <div>Its at {this.props.data.location} </div>
-        <div id="windowScore">{this.props.data.rating}</div>
-        <a href={this.props.data.yelpUrl}><button className="linkButton" id="yelp"></button></a>
-        <a href={this.props.data.yelpUrl}><button className="linkButton" id="twitter"></button></a>
-        <a href={this.props.data.yelpUrl}><button className="linkButton" id="tripadvisor"></button></a>
-      </div>
+      React.createElement("div", {id: "window"}, 
+        React.createElement("div", {id: "windowTitle"}, this.props.data.name), 
+        React.createElement("img", {id: "windowPicture", src: this.props.data.picture}), 
+        React.createElement("div", null, "Its at ", this.props.data.location, " "), 
+        React.createElement("div", {id: "windowScore"}, this.props.data.rating), 
+        React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "yelp"})), 
+        React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "twitter"})), 
+        React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "tripadvisor"}))
+      )
     )
   }
 });
@@ -75,6 +75,6 @@ var WindowView = React.createClass({
 
 // Renders the whole application
 React.render(
-  <AppView />,
+  React.createElement(AppView, null),
   document.getElementById('AppView')
 );

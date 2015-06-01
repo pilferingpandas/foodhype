@@ -1,27 +1,111 @@
+body{
+  font-family: 'Roboto Slab', serif;
+}
+
+#title{
+  position: fixed;
+  top:-10px;
+  font-family: 'Bowlby One', cursive;
+}
+
+/* Window */
+#window {
+  background: -webkit-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* IE10 */
+  background:      -o-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* Opera 11.10+ */
+  background:         linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* W3C */
+  
+  border: 2px solid black;
+  margin: 10px;
+  padding:10px;
+
+  width:200px;
+
+  position: fixed;
+  top:90px;
+  right:50px;
+
+  z-index: 2;
+
+}
+#window:focus {
+
+}
+#windowTitle{
+  font-size: 40px;
+}
+#windowScore{
+  text-shadow: 0 1px 0 #ccc,
+             0 2px 0 #c9c9c9,
+             0 3px 0 #bbb,
+             0 4px 0 #b9b9b9,
+             0 5px 0 #aaa,
+             0 6px 1px rgba(0,0,0,.1),
+             0 0 5px rgba(0,0,0,.1),
+             0 1px 3px rgba(0,0,0,.3),
+             0 3px 5px rgba(0,0,0,.2),
+             0 5px 10px rgba(0,0,0,.25),
+             0 10px 10px rgba(0,0,0,.2),
+             0 20px 20px rgba(0,0,0,.15);
+  font-size: 100px;
+  color:#fff;
+  letter-spacing: -5px;
+  text-align: center;
+  width:90%;
+  font-family: 'Bowlby One', cursive;
+}
+#windowPicture{
+  width:180px;
+  height:auto;
+}
+.linkButton{
+  width:40px;
+  height:40px;
+}
+#twitter{
+  background: url(http://www.gencdoku.com/wp-content/uploads/Twitter-iPad3-Logo-HD.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#tripadvisor{
+  background: url(http://crabshacks.com/wp-content/uploads/2014/04/trip-advisor-button.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#yelp{
+  background: url(http://static.squarespace.com/static/53a1cc98e4b0e0318ea7911a/53a84282e4b00a87730233bf/53a84282e4b00a87730233c0/1403536063207/yelp-icon.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 #map-canvas {
   height: 500px;
   margin-top: -10px;
   margin: 0 auto;
+  top:40px;
+  position: fixed;
 }
 
 .controls {
-        background-color: #fff;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        box-sizing: border-box;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        height: 32px;
-        margin-left: 120px;
-        margin-top: 5px;
-        outline: none;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 32px;
+  margin-left: 120px;
+  margin-top: 5px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
 }
 
 .controls:focus {
   border-color: #4d90fe;
 }
+
