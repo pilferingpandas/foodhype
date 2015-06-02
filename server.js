@@ -30,7 +30,7 @@ app.post('/yelpresults', function(req, res) {
       for (var i = 0; i < biz.length; i++) {
         // once we have a list of restaurants we want to make yelp api requests for each restaurant individually to get more info
         yelp.business( biz[i].id, function(error, business) {
-
+          if (business.location) {
           allBizs.push({
             name: business.name,
             id: business.id,
@@ -41,6 +41,7 @@ app.post('/yelpresults', function(req, res) {
             longitude : business.location.coordinate.longitude,
             latitude : business.location.coordinate.latitude
           });
+        }
           if (allBizs.length === biz.length) {
             res.send(allBizs);
           }

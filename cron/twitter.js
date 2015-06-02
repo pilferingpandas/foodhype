@@ -24,7 +24,7 @@ client.get('https://api.twitter.com/1.1/search/tweets.json', params, function(er
 var getApiData = function(thisYelpData, callback) {
     // Contact the API with thisYelpData, then...
 
-  callback(dataReturnedFromApi);
+ // callback(dataReturnedFromApi);
 }
 
 // Make sure this works!

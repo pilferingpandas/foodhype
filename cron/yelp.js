@@ -1,4 +1,6 @@
 //put yelp data here
+var keys = require('../config/panda-config.js');
+var yelp = require("yelp").createClient(keys.yelp);
 
 // Fill me out!
 module.exports = {
@@ -15,9 +17,8 @@ module.exports = {
   var returnNum = 10;
   var allBizs;
 
-
   // search san francisco for all food restaurants
-  yelp.search({term: "food", Location: "San Francisco", limit: returnNum}, function(error, data) {
+  yelp.search({term: "food", location: "San Francisco", limit: returnNum}, function(error, data) {
     if (!error) {
 
       allBizs = [];
@@ -28,7 +29,7 @@ module.exports = {
       for (var i = 0; i < biz.length; i++) {
         // once we have a list of restaurants we want to make yelp api requests for each restaurant individually to get more info
         yelp.business( biz[i].id, function(error, business) {
-
+          if (business.location){
           allBizs.push({
             name: business.name,
             id: business.id,
@@ -39,7 +40,9 @@ module.exports = {
             longitude : business.location.coordinate.longitude,
             latitude : business.location.coordinate.latitude
           });
+        }
           if (allBizs.length === biz.length) {
+            //console.log(allBizs)
             callback(allBizs);
           }
         });
@@ -48,4 +51,5 @@ module.exports = {
       console.log('error!');
     }
   });
+}
 }
