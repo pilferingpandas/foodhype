@@ -16,7 +16,8 @@ var job = new CronJob({
 
       // A piece of api data hasn't come back yet, so return.
       if((apiData.yelpData === undefined)    || (apiData.instagramData === undefined) || 
-         (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined) return;
+         (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined)) {
+          return true;};
 
       // All the data has come through! Calculate the score,
       var finalScore = secret.algorithm(apiData);
@@ -25,7 +26,7 @@ var job = new CronJob({
       var finalData = {
         name: apiData.yelpData.name,
         yelpUrl: undefined,
-        instagramPictureUrl: apiData.instagramData.bestPicture;
+        instagramPictureUrl: apiData.instagramData.bestPicture,
         score: finalScore,
         address: apiData.yelpData.address,
         latitude: apiData.yelpData.latitude,
@@ -40,7 +41,7 @@ var job = new CronJob({
     // Fetches all restaurants from yelp.
       // For now, just use testGetTenRestaurants
     yelp.testGetTenRestaurants(function(tenRestaurants){
-  
+      console.log('testing')
       // For each restaurant,
       tenRestaurants.forEach(function(thisRestaurant){
 
@@ -50,18 +51,18 @@ var job = new CronJob({
         // Send off several api calls, each with a callback 
           // checking if the data has been completely filled out.
           // When it has, it sends it to config.js
-        twitter.getApiData(thisRestaurant, function(returnedData) {
-          thisRestaurantApiData.twitterData = returnedData;
-          checkIfAllApisHaveResponded(thisRestaurantApiData);
-        });
-        gPlaces.getApiData(thisRestaurant, function(returnedData) {
-          thisRestaurantApiData.googlePlacesData = returnedData;
-          checkIfAllApisHaveResponded(thisRestaurantApiData);
-        });
-        instagram.getApiData(thisRestaurant, function(returnedData) {
-          thisRestaurantApiData.instagramData = returnedData;
-          checkIfAllApisHaveResponded(thisRestaurantApiData);
-        });
+        // twitter.getApiData(thisRestaurant, function(returnedData) {
+        //   thisRestaurantApiData.twitterData = returnedData;
+        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
+        // });
+        // gPlaces.getApiData(thisRestaurant, function(returnedData) {
+        //   thisRestaurantApiData.googlePlacesData = returnedData;
+        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
+        // });
+        // instagram.getApiData(thisRestaurant, function(returnedData) {
+        //   thisRestaurantApiData.instagramData = returnedData;
+        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
+        // });
       });
     });
     
