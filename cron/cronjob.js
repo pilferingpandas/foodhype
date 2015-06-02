@@ -5,6 +5,7 @@ var yelp = require('./yelp.js');
 var gPlaces = require('./googlePlaces.js');
 var instagram = require('./inst.js');
 var twitter = require('./twitter.js');
+var app = require('../server.js')
 
 var job = new CronJob({
   cronTime: '00 00 00 * * *',
