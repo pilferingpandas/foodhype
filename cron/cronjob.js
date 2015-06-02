@@ -17,7 +17,7 @@ var job = new CronJob({
       // A piece of api data hasn't come back yet, so return.
       if((apiData.yelpData === undefined)    || (apiData.instagramData === undefined) || 
          (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined)) {
-          return true;};
+          return;};
 
       // All the data has come through! Calculate the score,
       var finalScore = secret.algorithm(apiData);
