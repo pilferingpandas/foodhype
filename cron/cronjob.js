@@ -15,8 +15,8 @@ var job = new CronJob({
     var checkIfAllApisHaveResponded = function(apiData) {
 
       // A piece of api data hasn't come back yet, so return.
-      if(!apiData.yelpData    || !apiData.instagramData || 
-         !apiData.twitterData || !apiData.googlePlacesData) return;
+      if((apiData.yelpData === undefined)    || (apiData.instagramData === undefined) || 
+         (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined) return;
 
       // All the data has come through! Calculate the score,
       var finalScore = secret.algorithm(apiData);
@@ -38,30 +38,33 @@ var job = new CronJob({
     }
 
     // Fetches all restaurants from yelp.
-    var restaurants = yelp.getAllRestaurants();
-    
-    // For each restaurant,
-    restaurants.forEach(function(thisRestaurant){
+      // For now, just use testGetTenRestaurants
+    yelp.testGetTenRestaurants(function(tenRestaurants){
+  
+      // For each restaurant,
+      tenRestaurants.forEach(function(thisRestaurant){
 
-      //Make a new data variable
-      var thisRestaurantApiData = { yelpData: thisRestaurant };
+        //Make a new data variable
+        var thisRestaurantApiData = { yelpData: thisRestaurant };
 
-      // Send off several api calls, each with a callback 
-        // checking if the data has been completely filled out.
-        // When it has, it sends it to config.js
-      twitter.getApiData(thisRestaurant, function(returnedData) {
-        thisRestaurantApiData.twitterData = returnedData;
-        checkIfAllApisHaveResponded(thisRestaurantApiData);
-      });
-      gPlaces.getApiData(thisRestaurant, function(returnedData) {
-        thisRestaurantApiData.googlePlacesData = returnedData;
-        checkIfAllApisHaveResponded(thisRestaurantApiData);
-      });
-      instagram.getApiData(thisRestaurant, function(returnedData) {
-        thisRestaurantApiData.instagramData = returnedData;
-        checkIfAllApisHaveResponded(thisRestaurantApiData);
+        // Send off several api calls, each with a callback 
+          // checking if the data has been completely filled out.
+          // When it has, it sends it to config.js
+        twitter.getApiData(thisRestaurant, function(returnedData) {
+          thisRestaurantApiData.twitterData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
+        gPlaces.getApiData(thisRestaurant, function(returnedData) {
+          thisRestaurantApiData.googlePlacesData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
+        instagram.getApiData(thisRestaurant, function(returnedData) {
+          thisRestaurantApiData.instagramData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
       });
     });
+    
 
   },
   start: false,

@@ -15,7 +15,14 @@ db.once('open', function() {
 
 db.insertRestaurantData = function(data) {
   // It's already formatted for the restaurantSchema
+  // db.San_Francisco.insert(data);
+}
 
+db.getAllRestaurantsInCity = function(callback) { // no argument because we're only searching sf
+  // one of the last things for us to implement  
+
+  // var allRestaurants = all restaurants in the city as an array
+  // callback(allRestaurants)
 }
 
 module.exports = db;
