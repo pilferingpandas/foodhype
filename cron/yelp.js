@@ -42,7 +42,7 @@ module.exports = {
           });
         }
           if (allBizs.length === biz.length) {
-            console.log(allBizs)
+            //console.log(allBizs)
             callback(allBizs);
           }
         });
