@@ -1,7 +1,6 @@
 var express = require('express');
 var favicon = require('serve-favicon');
 var app = express();
-var inst = require('./inst.js')
 var fs = require('fs');
 var keys = require('./config/panda-config.js');
 var bodyParser = require('body-parser');
