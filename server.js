@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 var yelp = require("yelp").createClient(keys.yelp);
 
-var returnNum = 10;
+var returnNum = 20;
 var allBizs;
 
 app.post('/yelpresults', function(req, res) {

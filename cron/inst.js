@@ -4,52 +4,45 @@ var yelp = require('./yelp.js');
 instagram.set('client_id', keys.instagram.client_id);
 instagram.set('client_secret', keys.instagram.client_secret);
 
-var restaurants = yelp.testGetTenRestaurants(function(restaurantsFromYelp){
-     for (var i=0; i<restaurantsFromYelp.length; i++){
-        var restaurantName = restaurantsFromYelp[i].name;
-        // escape single quotes in the name
-        
-        var latitude = Math.ceil(restaurantsFromYelp[i].latitude);
-        module.exports.getApiData(restaurantName, latitude, console.log)
-      }
-});
-
-
-// Fill me out! 
+// data coming from cronjob.js consisting of one restaurant object retrieved from yelp
 module.exports = {
   getApiData : function(restaurantName, latitude, callback) {
-    // Contact the API with thisYelpData, then...
+
+    var latitudeFromYelp = Math.ceil(latitude);
+    // processing of the name in preparation for calling instagram
     resName = restaurantName.replace(/'/g, "");
+    resName = resName.replace(/&/g, "and")
     // join words into one string
     resName = resName.replace(/ /g, "").toLowerCase();
+    // call instagram
     instagram.tags.recent({ name: resName, 
       complete: function(data){
         var count = 0; 
         var url = null;
-        console.log('contacting instagram for', resName)
-        
-        // iterate through the data array and check if coordinates are the same as yelp cors
+        // console.log(data)
+        var urlInstgramProfile = null;
+        // iterate through the data array returned from instagram and check if coordinates are the same as yelp cors
         for ( var i=0 ; i<data.length; i++){
               if (data[i].location){
-                    if (Math.ceil(data[i].location.latitude) === latitude){
+                    if (Math.ceil(data[i].location.latitude) === latitudeFromYelp){
                           //console.log('found');
                           if (count === 0){
-                            // url = data[i].link;// this would return instagram profile page
+                            // return instagram profile page
+                            urlInstgramProfile = data[i].link;
                             // url = data[i].images.standard_resolution.url
-                            // for thumbnail
+                            // ur for thumbnail
                             url = data[i].images.thumbnail.url
                           }
                           count++;
-                    } else {
-                      // the location does not match location of restaurant
-                      //console.log(data[i].location)
-                    }
+                        }
               }
         }
         var dataFromInstagram = {
           numPics : count,
-          url : url
+          url : url,
+          urlInstgramProfile: urlInstgramProfile
         }
+        //console.log(dataFromInstagram)
         callback(dataFromInstagram);
     }
     });

@@ -1,17 +1,13 @@
-var CronJob = require('cron').CronJob;
 var secret = require('../config/panda-config.js');
-var db = require('../db/database.js');
 var yelp = require('./yelp.js');
 var gPlaces = require('./googlePlaces.js');
 var instagram = require('./inst.js');
 var twitter = require('./twitter.js');
 var app = require('../server.js')
 
-var job = new CronJob({
-  cronTime: '00 00 00 * * *',
-  onTick: function() {
 
-    // This method checks if all the data is filled out. It's called at
+
+      // This method checks if all the data is filled out. It's called at
       // the end of every callback.
     var checkIfAllApisHaveResponded = function(apiData) {
 
@@ -34,33 +30,35 @@ var job = new CronJob({
         longitude: apiData.yelpData.longitude
         //more?
       }
-
-      //Insert it into the db
-      db.insertRestaurantData(finalData);
+      // instead of contacting database something should happen here
+      // like display restaurant scores
     }
 
     // Fetches all restaurants from yelp.
       // For now, just use testGetTenRestaurants
-    yelp.testGetTenRestaurants(function(tenRestaurants){
-      console.log('testing')
+    yelp.getAllRestaurantData(function(allRestaurants){
+      console.log('getting restaurants from yelp')
+      
       // For each restaurant,
-      tenRestaurants.forEach(function(thisRestaurant){
+      allRestaurants.forEach(function(thisRestaurant){
         //Make a new data variable
         var thisRestaurantApiData = { yelpData: thisRestaurant };
-
         // Send off several api calls, each with a callback 
           // checking if the data has been completely filled out.
           // When it has, it sends it to config.js
+
         twitter.getApiData(thisRestaurant, function(returnedData) {
           thisRestaurantApiData.twitterData = returnedData;
           checkIfAllApisHaveResponded(thisRestaurantApiData);
         });
+
         gPlaces.getApiData(thisRestaurant, function(returnedData) {
           thisRestaurantApiData.googlePlacesData = returnedData;
           checkIfAllApisHaveResponded(thisRestaurantApiData);
         });
+
         instagram.getApiData(thisRestaurant.name, thisRestaurant.latitude , function(returnedData) {
-          console.log(returnedData);
+         //console.log(returnedData);
           thisRestaurantApiData.instagramData = returnedData;
           checkIfAllApisHaveResponded(thisRestaurantApiData);
         });
@@ -68,9 +66,4 @@ var job = new CronJob({
     });
     
 
-  },
-  start: false,
-  timeZone: 'America/Los_Angeles'
-});
 
-job.start();
