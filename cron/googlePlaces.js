@@ -1,12 +1,15 @@
 //put gp data here
 
 // Fill me out!
+// Fill this out!
 module.exports = {
-  getApiData : function(thisYelpData, callback) {
-    // Contact the API with thisYelpData, then...
+  getApiData : function(thisRestaurant, callback ){
+    //console.log('returning one restaurant-object from yelp at a time', thisRestaurant)
+     // call google places with thisRestaurant, for example thisRestaurant.name ,thisRestaurant.latitude
+     // data returned from google places for each restaurant should be passed back as an object: dataReturnedFromApi into callback 
 
-    callback(dataReturnedFromApi);
-  }
+    // callback(dataReturnedFromApi);
+ }
 }
 
 // format: 

@@ -5,16 +5,10 @@ var yelp = require("yelp").createClient(keys.yelp);
 // Fill me out!
 module.exports = {
   getAllRestaurantData : function(callback) {
-    // Contact yelp api, get all restaurants in san francisco, then call a callback with them
-    
-    // callback(allRestaurants);
-  },
-  testGetTenRestaurants : function(callback) {
-    //from server.js
 
   var yelp = require("yelp").createClient(keys.yelp);
 
-  var returnNum = 10;
+  var returnNum = 20;
   var allBizs;
 
   // search san francisco for all food restaurants
@@ -42,7 +36,7 @@ module.exports = {
           });
         }
           if (allBizs.length === biz.length) {
-            //console.log(allBizs)
+            //console.log('restaurant from yelp', allBizs)
             callback(allBizs);
           }
         });
