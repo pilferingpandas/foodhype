@@ -5,6 +5,7 @@ var yelp = require('./yelp.js');
 var gPlaces = require('./googlePlaces.js');
 var instagram = require('./inst.js');
 var twitter = require('./twitter.js');
+var app = require('../server.js')
 
 var job = new CronJob({
   cronTime: '00 00 00 * * *',
@@ -44,25 +45,25 @@ var job = new CronJob({
       console.log('testing')
       // For each restaurant,
       tenRestaurants.forEach(function(thisRestaurant){
-
         //Make a new data variable
         var thisRestaurantApiData = { yelpData: thisRestaurant };
 
         // Send off several api calls, each with a callback 
           // checking if the data has been completely filled out.
           // When it has, it sends it to config.js
-        // twitter.getApiData(thisRestaurant, function(returnedData) {
-        //   thisRestaurantApiData.twitterData = returnedData;
-        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
-        // });
-        // gPlaces.getApiData(thisRestaurant, function(returnedData) {
-        //   thisRestaurantApiData.googlePlacesData = returnedData;
-        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
-        // });
-        // instagram.getApiData(thisRestaurant, function(returnedData) {
-        //   thisRestaurantApiData.instagramData = returnedData;
-        //   checkIfAllApisHaveResponded(thisRestaurantApiData);
-        // });
+        twitter.getApiData(thisRestaurant, function(returnedData) {
+          thisRestaurantApiData.twitterData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
+        gPlaces.getApiData(thisRestaurant, function(returnedData) {
+          thisRestaurantApiData.googlePlacesData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
+        instagram.getApiData(thisRestaurant.name, thisRestaurant.latitude , function(returnedData) {
+          console.log(returnedData);
+          thisRestaurantApiData.instagramData = returnedData;
+          checkIfAllApisHaveResponded(thisRestaurantApiData);
+        });
       });
     });
     
