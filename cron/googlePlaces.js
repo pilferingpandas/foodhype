@@ -1,21 +1,41 @@
-//put gp data here
+var keys = require('../config/panda-config.js');
+var GooglePlaces = require('google-places');
+var places = new GooglePlaces(keys.googleMap.map);
 
-// Fill me out!
-// Fill this out!
 module.exports = {
   getApiData : function(thisRestaurant, callback ){
-    //console.log('returning one restaurant-object from yelp at a time', thisRestaurant)
-     // call google places with thisRestaurant, for example thisRestaurant.name ,thisRestaurant.latitude
-     // data returned from google places for each restaurant should be passed back as an object: dataReturnedFromApi into callback 
-
-    // callback(dataReturnedFromApi);
- }
+    var loc = [thisRestaurant.latitude, thisRestaurant.longitude];
+    getGooglePlacesInfo(thisRestaurant.name, loc, callback);
+  }
 }
 
-// format: 
-// dataReturnedFromApi.numReviews
-//   ^ number of reviews
-// dataReturnedFromApi.score
-//   ^ average score
-// dataReturnedFromApi.url
-//   ^ url of google places data (is this possible?)
+var getGooglePlacesInfo = function(currentBizName, loc, callback) {
+
+ //console.log('google places search for '+ currentBizName);
+
+ places.search({keyword: currentBizName, location: loc, radius: '1'}, function(err, response) {
+   if(err) { console.log(err); return; }
+   //console.log("search: ", response.results);
+
+   if (response.results.length > 0) {
+     // get details for the first found restaurant
+     places.details({reference: response.results[0].reference}, function(err, response) {
+       if(err) { console.log(err); return; }
+       //console.log("search details: ", response.result.website);
+       //console.log('searching for ' + currentBizName + ' found ' + response.result.name);
+       if(currentBizName == response.result.name) {
+         //console.log('found it');
+         callback({
+           name: response.result.name,
+           googlePlacesNumReviews: response.result.user_ratings_total,
+           googlePlacesAvgRating: response.result.rating
+         });
+       } else {
+         console.log('didnt find it in google places');
+         callback(null);
+       }
+     });
+   }
+
+ });
+}
