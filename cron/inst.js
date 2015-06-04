@@ -1,4 +1,4 @@
-var keys = require('../config/panda-config.js');
+var keys = PROCESS.ENV.MONGOLAB || require('../config/panda-config.js');
 var instagram = require('instagram-node-lib');
 var yelp = require('./yelp.js');
 instagram.set('client_id', keys.instagram.client_id);

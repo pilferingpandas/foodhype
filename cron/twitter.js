@@ -1,5 +1,6 @@
 var Twitter = require('twitter');
-var client = new Twitter(require('../config/panda-config.js').twitter);
+var keys = PROCESS.ENV.MONGOLAB || require('../config/panda-config.js').twitter;
+var client = new Twitter(keys);
 
 // Search for the tweets
 var params = {q: 'restaurant%20%3A)&geocode=37.7880000,-122.3998380,15km&lang=en&result_type=recent&src=typd'};

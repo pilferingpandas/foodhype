@@ -2,7 +2,7 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var app = express();
 var fs = require('fs');
-var keys = require('./config/panda-config.js');
+var keys = PROCESS.ENV.MONGOLAB || require('./config/panda-config.js');
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/client'));

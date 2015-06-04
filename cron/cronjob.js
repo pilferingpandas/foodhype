@@ -1,4 +1,4 @@
-var secret = require('../config/panda-config.js');
+var secret = PROCESS.ENV.MONGOLAB || require('../config/panda-config.js');
 var yelp = require('./yelp.js');
 var gPlaces = require('./googlePlaces.js');
 var instagram = require('./inst.js');
