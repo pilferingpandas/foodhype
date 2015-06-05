@@ -8,7 +8,7 @@ instagram.set('client_secret', keys.instagram.client_secret);
 module.exports = {
   getApiData : function(restaurantName, latitude, callback) {
 
-    var latitudeFromYelp = Math.ceil(latitude);
+    var latitudeFromYelp = Math.floor(latitude);
     // processing of the name in preparation for calling instagram
     resName = restaurantName.replace(/'/g, "");
     resName = resName.replace(/&/g, "and")
@@ -19,14 +19,15 @@ module.exports = {
       complete: function(data){
         var count = 0; 
         var url = null;
+        var randomNumber = Math.floor(Math.random()*data.length);
         // console.log(data)
         var urlInstgramProfile = null;
         // iterate through the data array returned from instagram and check if coordinates are the same as yelp cors
         for ( var i=0 ; i<data.length; i++){
               if (data[i].location){
-                    if (Math.ceil(data[i].location.latitude) === latitudeFromYelp){
+                    if (Math.floor(data[i].location.latitude) === latitudeFromYelp){
                           //console.log('found');
-                          if (count === 0){
+                          if ( randomNumber === i ){
                             // return instagram profile page
                             urlInstgramProfile = data[i].link;
                             // url = data[i].images.standard_resolution.url
