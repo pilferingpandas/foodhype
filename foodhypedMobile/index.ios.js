@@ -16,17 +16,9 @@ var {
   View,
 } = React;
 
-// var fakedPins = [{"title":"Deli Board","latitude":37.7776794,"longitude":-122.4070892},{"title":"Tempest","latitude":37.7812215727578,"longitude":-122.40627989109},{"title":"Little Skillet","latitude":37.778873,"longitude":-122.393918},{"title":"Elmira Rosticceria","latitude":37.7809486,"longitude":-122.4146576},{"title":"Super Duper Burgers","latitude":37.7853266304187,"longitude":-122.403684605543},{"title":"Crepes A Go Go","latitude":37.7710686,"longitude":-122.4134064},{"title":"Garaje","latitude":37.7816626955148,"longitude":-122.396104066043},{"title":"Tony Baloneys","latitude":37.7781868,"longitude":-122.4093552}];
-
 var foodhypedMobile = React.createClass({
   getInitialState: function() {
     return {
-      fakeyData: {
-        name: '',
-        longitude: '',
-        latitude: '',
-        address: ''
-      },
       loading: true,
       name: '',
       address: '',
@@ -63,8 +55,6 @@ var foodhypedMobile = React.createClass({
     })
     .then(function(response) {
       console.log('about to set state');
-      // that.setState({fakeyData: {name: "what?!"}});
-      // return;
       response = (response._bodyInit)
         .replace("'", "")
         .replace("\"", "'")
