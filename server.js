@@ -55,7 +55,7 @@ app.post('/yelpresults', function(req, res) {
 
 });
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port);
 
 console.log('Express server started on port %s', port);

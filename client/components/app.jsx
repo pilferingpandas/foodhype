@@ -28,13 +28,6 @@ var AppView = React.createClass({
     return {
       selectedMarkerData: {
         display: false,
-        // name: "The Melt"
-        // picture:'http://aht.seriouseats.com/images/2012/04/20120427-bk-japan-ringo-burger-product-shot.jpg',
-        // location: "115 New Montgomery St,\nSan Francisco, CA 94105",
-        // rating: 56,
-        // yelpUrl: 'http://www.yelp.com/biz/the-melt-new-montgomery-san-francisco',
-        // twitterUrl: 'https://twitter.com/search?q=%22the%20melt%22%20%3A%29&geocode=37.7880000,-122.3998380,15km',
-        // tripadvisorUrl: 'http://www.tripadvisor.com/Restaurant_Review-g60713-d4834219-Reviews-The_Melt-San_Francisco_California.html'
       }
     }
   },
@@ -47,8 +40,6 @@ var AppView = React.createClass({
         <input id="pac-input" className="controls" type="text" placeholder="Start typing here"></input>
 
         <WindowView data={this.state.selectedMarkerData} />
-        
-        // <div id="map-canvas"></div>
       </div>
     )
   }
