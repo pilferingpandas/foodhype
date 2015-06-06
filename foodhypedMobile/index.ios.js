@@ -12,7 +12,6 @@ var {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } = React;
 
@@ -22,7 +21,11 @@ var foodhypedMobile = React.createClass({
       loading: true,
       name: '',
       address: '',
-      pins: []
+      pins: [],
+      region: {
+        latitude: 37.7833,
+        longitude: -122.4167
+      }
     }
   },
   render: function() {
@@ -30,14 +33,24 @@ var foodhypedMobile = React.createClass({
       <View>
         <MapView style={styles.map} 
                  showsUserLocation={true}
-                 annotations={this.state.pins}  />
+                 annotations={this.state.pins} 
+                 region={this.state.region} 
+                 maxDelta={.035} />
         <RestaurantScroll clickHandler={this.clickHandler} 
                           data={this.state.pins} />
       </View>
-    );
+    );      
   },
   clickHandler: function(data) {
-    console.log(data);
+    this.setState({
+      region: {      
+        latitude: data.latitude,
+        longitude: data.longitude
+      }
+    });
+  },
+  moveToNewSpot: function(lat, long) {
+
   },
   componentDidMount: function() {
     console.log('mounted!');
@@ -82,23 +95,25 @@ var foodhypedMobile = React.createClass({
   },
 });
 
-var makeViewEntry = function(data) {
-    // <View onClick={this.handleClick(data)}>
-  return (
-    <View>
-      <Text>Name: {data.title}</Text>
-      <Text>Address: {data.address}</Text>
-      <Text>Latitude: {data.latitude}</Text>
-      <Text>Longitude: {data.longitude}</Text>
-    </View>
-  )}
 var RestaurantScroll = React.createClass({
   render: function() {
+    var that = this;
+    var makeViewEntry = function(data) {
+      var clickHandler = function() {
+        that.props.clickHandler(data);
+      }
+      return (
+        <View style={styles.restaurant}>
+          <Text onPress={clickHandler}>Name: {data.title}</Text>
+          <Text onPress={clickHandler}>Address: {data.address}</Text>
+          <Text onPress={clickHandler}>Latitude: {data.latitude}</Text>
+          <Text onPress={clickHandler}>Longitude: {data.longitude}</Text>
+        </View>
+      )
+    };
     return (
       <ScrollView
-        onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
-        contentInset={{top: -50}}
         style={styles.scrollView}>
           {this.props.data.map(makeViewEntry)}
       </ScrollView>
@@ -113,29 +128,21 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000000',
   },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  textInput: {
-    width: 150,
-    height: 20,
-    borderWidth: 0.5,
-    borderColor: '#aaaaaa',
-    fontSize: 13,
-    padding: 4,
-  },
-  changeButton: {
-    alignSelf: 'center',
-    marginTop: 5,
-    padding: 3,
-    borderWidth: 0.5,
-    borderColor: '#777777',
-  },
   scrollView: {
     backgroundColor: '#6A85B1',
-    top:48,
-    height: 100,
+    top:8,
+    height: 140,
+  },
+  restaurant: {
+    margin:10,
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'white',
+    padding:5,
+    shadowColor: 'white',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 1,
+    shadowRadius: 5,
   }
 });
 
