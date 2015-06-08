@@ -5,6 +5,8 @@ var fs = require('fs');
 var keys = require('./config/panda-config.js');
 var bodyParser = require('body-parser');
 
+var notActuallyACronJob = require('./cron/cronjob.js');
+
 app.use(express.static(__dirname + '/client'));
 app.use(favicon(__dirname + '/client/favicon/favicon.ico'));
 app.use(bodyParser.json());
@@ -31,18 +33,19 @@ app.post('/yelpresults', function(req, res) {
         // once we have a list of restaurants we want to make yelp api requests for each restaurant individually to get more info
         yelp.business( biz[i].id, function(error, business) {
           if (business.location) {
-          allBizs.push({
-            name: business.name,
-            id: business.id,
-            address: business.location.address,
-            reviewCount: business.review_count,
-            rating: business.rating,
-            image_url: business.image_url,
-            longitude : business.location.coordinate.longitude,
-            latitude : business.location.coordinate.latitude
-          });
-        }
+            allBizs.push({
+              name: business.name,
+              id: business.id,
+              address: business.location.address,
+              reviewCount: business.review_count,
+              rating: business.rating,
+              image_url: business.image_url,
+              longitude : business.location.coordinate.longitude,
+              latitude : business.location.coordinate.latitude
+            });
+          }
           if (allBizs.length === biz.length) {
+
             res.send(allBizs);
           }
         });
