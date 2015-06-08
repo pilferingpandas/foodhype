@@ -33,7 +33,7 @@ body{
 
 }
 #windowTitle{
-  font-size: 40px;
+  font-size: 25px;
 }
 #windowScore{
   text-shadow: 0 1px 0 #ccc,
@@ -68,13 +68,18 @@ body{
   background-size: 100%;
   background-repeat: no-repeat;
 }
-#tripadvisor{
-  background: url(http://crabshacks.com/wp-content/uploads/2014/04/trip-advisor-button.png);
+#instagram{
+  background: url(http://sashasbloc.com/wp-content/uploads/2015/05/instagram.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
 #yelp{
   background: url(http://static.squarespace.com/static/53a1cc98e4b0e0318ea7911a/53a84282e4b00a87730233bf/53a84282e4b00a87730233c0/1403536063207/yelp-icon.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#googlePlaces{
+  background: url(http://logodatabases.com/wp-content/uploads/2012/03/google-plus-1024x1024.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
 }

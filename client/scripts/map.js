@@ -168,6 +168,8 @@ var getRestaurants = function() {
   }).done(  function(restaurantData) {
     restaurantData = JSON.parse(restaurantData);
 
+    console.log(restaurantData);
+
     var makeMarker = function(index) {
       var marker = new google.maps.Marker({
         map:map,
@@ -181,6 +183,7 @@ var getRestaurants = function() {
 
       // Push to globally accessible markers array
       window.markers.push(marker);
+
 
       // Add clickhandler
       google.maps.event.addListener(window.markers[index], 'click', markerClickHandler);    
@@ -223,8 +226,10 @@ var getRestaurants = function() {
   }.bind(this)); //not sure what the bind is for... -Nick
 
   var markerClickHandler = function(e) {
+    console.log(window.markers);
     for(var i = 0; i < window.markers.length; i++) {
       if(e.latLng === window.markers[i].getPosition()) {
+        console.log(window.markers[i].data);
         $(document).trigger('markerClick', [window.markers[i].data]);
       }
     }
