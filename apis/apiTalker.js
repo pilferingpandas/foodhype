@@ -11,10 +11,12 @@ var app = require('../server.js')
   // the end of every callback.
 var checkIfAllApisHaveResponded = function(apiData, callback) {
 
+  console.log(Object.keys(apiData));
 
   // A piece of api data hasn't come back yet, so return.
   if((apiData.yelpData === undefined)    || (apiData.instagramData === undefined) || 
-     (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined)) {
+     // (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined)) {
+     (apiData.twitterData === undefined) ) {
       return;};
 
   // All the data has come through! Calculate the score,
@@ -27,7 +29,7 @@ var checkIfAllApisHaveResponded = function(apiData, callback) {
     twitterUrl: apiData.twitterData.twitterUrl,
     instagramPictureUrl: apiData.instagramData.instagramPictureUrl,
     instagramUrl: apiData.instagramData.urlInstagramProfile,
-    gPlacesUrl: apiData.googlePlacesData.googlePlacesUrl,
+    gPlacesUrl: null,
     score: finalScore,
     address: apiData.yelpData.address,
     latitude: apiData.yelpData.latitude,
@@ -48,6 +50,7 @@ module.exports = {
 
     //Make a new data variable
     var thisRestaurantApiData = { yelpData: thisRestaurant };
+    console.log(thisRestaurantApiData);
     // Send off several api calls, each with a callback 
       // checking if the data has been completely filled out.
       // When it has, it sends it to config.js
@@ -57,10 +60,10 @@ module.exports = {
       checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
     });
 
-    gPlaces.getApiData(thisRestaurant, function(returnedData) {
-      thisRestaurantApiData.googlePlacesData = returnedData;
-      checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
-    });
+    // gPlaces.getApiData(thisRestaurant, function(returnedData) {
+    //   thisRestaurantApiData.googlePlacesData = returnedData;
+    //   checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
+    // });
 
     instagram.getApiData(thisRestaurant.name, thisRestaurant.latitude , function(returnedData) {
       thisRestaurantApiData.instagramData = returnedData;

@@ -76,11 +76,14 @@ var foodhypedMobile = React.createClass({
       console.log(response.length);
       var resPins = [];
       for(var i = 0; i < response.length; i++) {
+        console.log(response[i]);
         resPins.push({
           title: response[i].name,
+          score: response[i].score,
           latitude: response[i].latitude,
           longitude: response[i].longitude,
-          address: response[i].address[0]
+          address: response[i].address[0],
+          imageUrl: response[i].instagramPictureUrl
         });
       }
       that.setState({pins: resPins});
@@ -106,8 +109,9 @@ var RestaurantScroll = React.createClass({
         <View style={styles.restaurant}>
           <Text onPress={clickHandler}>Name: {data.title}</Text>
           <Text onPress={clickHandler}>Address: {data.address}</Text>
-          <Text onPress={clickHandler}>Latitude: {data.latitude}</Text>
-          <Text onPress={clickHandler}>Longitude: {data.longitude}</Text>
+          <Text onPress={clickHandler}>Score: {data.score}</Text>
+          <Image style={styles.logo} source={{uri: data.imageUrl}} />
+
         </View>
       )
     };
@@ -143,6 +147,10 @@ var styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 5,
+  },
+  logo: {
+    width: 40,
+    height: 40,
   }
 });
 

@@ -52,6 +52,7 @@ app.post('/yelpresults', function(req, res) {
                 console.log('////////////////////////////////////');
                 console.log('////////////////////////////////////');
                 console.log('////////////////////////////////////');
+                console.log('////////////////////////////////////');
                 console.log(allBizs);
                 res.send(allBizs);
                 hasReturnedData = true;
