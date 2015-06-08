@@ -37,3 +37,6 @@ bower_components/
 
 # Keys to avoid publishing to github
 panda-config.js
+
+# xcode (?)
+*.xcuserstate
