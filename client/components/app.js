@@ -1,7 +1,4 @@
-// The order of this file matters!
-  // 1. All React components are created
-  // 2. The AppView is rendered
-  // 3. The Google Map is rendered
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 //////////////////////////
 /// React Views        ///
@@ -34,8 +31,9 @@ var AppView = React.createClass({displayName: "AppView",
       React.createElement("div", {id: "wrapper"}, 
         React.createElement("h1", {id: "title"}, "Food Hyped"), 
         React.createElement("input", {id: "pac-input", className: "controls", type: "text", placeholder: "Start typing here"}), 
-
-        React.createElement(WindowView, {data: this.state.selectedMarkerData})
+        React.createElement(ReactCSSTransitionGroup, {transitionName: "window", transitionAppear: "true"}, 
+          React.createElement(WindowView, {data: this.state.selectedMarkerData})
+        )
       )
     )
   }

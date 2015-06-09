@@ -50,8 +50,7 @@ module.exports = {
 
     //Make a new data variable
     var thisRestaurantApiData = { yelpData: thisRestaurant };
-    console.log(thisRestaurantApiData);
-    // Send off several api calls, each with a callback
+    // Send off several api calls, each with a callback 
       // checking if the data has been completely filled out.
       // When it has, it sends it to config.js
 
