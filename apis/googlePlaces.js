@@ -21,13 +21,13 @@ var getGooglePlacesInfo = function(currentBizName, loc, callback) {
       console.log('found a result');
       places.details({reference: response.results[0].reference}, function(err, response) {
         if(err) { console.log(err); return; }
-        console.log('found a business:' + response.result.name);
-        if(currentBizName == response.result.name) {
+        console.log('found a business:' + response.name);
+        if(currentBizName == response.name) {
           callback({
-            name: response.result.name,
-            googlePlacesUrl: response.result.url,
-            googlePlacesNumReviews: response.result.user_ratings_total,
-            googlePlacesAvgRating: response.result.rating
+            name: response.name,
+            googlePlacesUrl: response.url,
+            googlePlacesNumReviews: response.user_ratings_total,
+            googlePlacesAvgRating: response.rating
           });
         } else {
           console.log('didnt find it in google places');
