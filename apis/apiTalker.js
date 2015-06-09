@@ -7,14 +7,15 @@ var app = require('../server.js')
 
 
 
-  // This method checks if all the data is filled out. It's called at
-  // the end of every callback.
+// This method checks if all the data is filled out. It's called at
+// the end of every callback.
 var checkIfAllApisHaveResponded = function(apiData, callback) {
 
   console.log(Object.keys(apiData));
 
   // A piece of api data hasn't come back yet, so return.
   if((apiData.yelpData === undefined) || (apiData.instagramData === undefined) ||
+    // Uncomment when google places hasn't rate limited us anymore.
     // (apiData.googlePlacesData === undefined) ||
      (apiData.twitterData === undefined) ) {
       return;};
@@ -34,19 +35,13 @@ var checkIfAllApisHaveResponded = function(apiData, callback) {
     address: apiData.yelpData.address,
     latitude: apiData.yelpData.latitude,
     longitude: apiData.yelpData.longitude
-    //more?
   }
   callback(finalData);
 }
 
 module.exports = {
   // Fetches all restaurants from yelp.
-    // For now, just use testGetTenRestaurants
   contactOtherApis : function(thisRestaurant, callback){
-
-    // For each restaurant,
-    // allRestaurants.forEach(function(thisRestaurant){
-
 
     //Make a new data variable
     var thisRestaurantApiData = { yelpData: thisRestaurant };
@@ -59,6 +54,7 @@ module.exports = {
       checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
     });
 
+  // Uncomment when google places hasn't rate limited us anymore.
     // gPlaces.getApiData(thisRestaurant, function(returnedData) {
     //   thisRestaurantApiData.googlePlacesData = returnedData;
     //   checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
@@ -68,6 +64,5 @@ module.exports = {
       thisRestaurantApiData.instagramData = returnedData;
       checkIfAllApisHaveResponded(thisRestaurantApiData, callback);
     });
-    // });
   }
 }

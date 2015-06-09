@@ -196,7 +196,7 @@ var getRestaurants = function() {
     }
 
 
-  //May animate this later.
+  // An attempt at animating pin drops.
     // var makeMarkerWithTimeout = function(markerIndex) {
     //   window.setTimeout(function() {
     //     var marker = new google.maps.Marker({
@@ -223,7 +223,7 @@ var getRestaurants = function() {
     // }
 
 
-  }.bind(this)); //not sure what the bind is for... -Nick
+  }.bind(this)); 
 
   var markerClickHandler = function(e) {
     console.log(window.markers);

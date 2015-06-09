@@ -36,7 +36,6 @@ module.exports = {
           });
         }
           if (allBizs.length === biz.length) {
-            //console.log('restaurant from yelp', allBizs)
             callback(allBizs);
           }
         });

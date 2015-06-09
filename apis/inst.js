@@ -4,7 +4,6 @@ var yelp = require('./yelp.js');
 instagram.set('client_id', keys.instagram.client_id);
 instagram.set('client_secret', keys.instagram.client_secret);
 
-// data coming from cronjob.js consisting of one restaurant object retrieved from yelp
 module.exports = {
   getApiData : function(restaurantName, latitude, callback) {
 
@@ -46,11 +45,3 @@ module.exports = {
     });
   }
 }
-
-// format: 
-// dataReturnedFromApi.numPics
-//   ^ number of pictures
-// dataReturnedFromApi.bestPicture
-//   ^ url of whatever the best picture is
-// dataReturnedFromApi.url
-//   ^ url of instagram results (is this possible?)
