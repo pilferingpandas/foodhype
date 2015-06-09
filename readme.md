@@ -1,3 +1,4 @@
+# Foodhyped
 
 ### Setup Local Environment
 Clone repo to your computer:
@@ -31,7 +32,7 @@ Be cautious while contacting the APIs as they have daily limits.
 If you need any help, please send us an email: pilferingpandas@gmail.com
 
 
-# Twitter usage
+### Twitter usage
 Use npm twitter package
 Make sure to store keys in a file that is added to gitignore file and then reference via object reference
 Separate query into an object using the data that comes back from the Yelp api as the query criteria - this info must be stored in a comma separated object
