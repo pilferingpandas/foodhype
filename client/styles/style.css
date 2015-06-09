@@ -15,7 +15,7 @@ body{
   background:     -ms-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* IE10 */
   background:      -o-linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* Opera 11.10+ */
   background:         linear-gradient(180deg, #e4d4e4 10%, #d4e4d9 90%); /* W3C */
-  
+
   border: 2px solid black;
   margin: 10px;
   padding:10px;
@@ -79,11 +79,23 @@ body{
   background-repeat: no-repeat;
 }
 #googlePlaces{
-  background: url(http://logodatabases.com/wp-content/uploads/2012/03/google-plus-1024x1024.jpg);
+  background: url(http://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Map-icon.svg/1024px-Map-icon.svg.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
-
+#twilio{
+  background: url(http://xaerl4biy4u25tomz3q6jdf3.wpengine.netdna-cdn.com/wp-content/uploads/2010/09/SMS-Isnt-Just-For-Kids-72-Percent-Of-Adults-Routinely-Send-Text-Messages-Too.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#twilioForm {
+  z-index: 1000;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
 #map-canvas {
   height: 500px;
   margin-top: -10px;
@@ -113,4 +125,3 @@ body{
 .controls:focus {
   border-color: #4d90fe;
 }
-

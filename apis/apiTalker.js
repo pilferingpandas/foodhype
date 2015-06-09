@@ -14,15 +14,15 @@ var checkIfAllApisHaveResponded = function(apiData, callback) {
   console.log(Object.keys(apiData));
 
   // A piece of api data hasn't come back yet, so return.
-  if((apiData.yelpData === undefined)    || (apiData.instagramData === undefined) || 
-     // (apiData.twitterData === undefined) || (apiData.googlePlacesData === undefined)) {
+  if((apiData.yelpData === undefined) || (apiData.instagramData === undefined) ||
+    // (apiData.googlePlacesData === undefined) ||
      (apiData.twitterData === undefined) ) {
       return;};
 
   // All the data has come through! Calculate the score,
   var finalScore = secret.algorithm(apiData);
 
-  // Parse the api data 
+  // Parse the api data
   var finalData = {
     name: apiData.yelpData.name,
     yelpUrl: apiData.yelpData.yelpUrl,
@@ -43,7 +43,7 @@ module.exports = {
   // Fetches all restaurants from yelp.
     // For now, just use testGetTenRestaurants
   contactOtherApis : function(thisRestaurant, callback){
-    
+
     // For each restaurant,
     // allRestaurants.forEach(function(thisRestaurant){
 
@@ -51,7 +51,7 @@ module.exports = {
     //Make a new data variable
     var thisRestaurantApiData = { yelpData: thisRestaurant };
     console.log(thisRestaurantApiData);
-    // Send off several api calls, each with a callback 
+    // Send off several api calls, each with a callback
       // checking if the data has been completely filled out.
       // When it has, it sends it to config.js
 
