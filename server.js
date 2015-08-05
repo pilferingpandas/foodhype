@@ -72,12 +72,6 @@ app.post('/yelpresults', function(req, res) {
               allBizs.push(finalData);
               console.log(allBizs.length + " out of " + biz.length);
               if (allBizs.length > 12 && !hasReturnedData) {
-                console.log('////////////////////////////////////');
-                console.log('////////////////////////////////////');
-                console.log('////////////////////////////////////');
-                console.log('////////////////////////////////////');
-                console.log('////////////////////////////////////');
-                console.log(allBizs);
                 res.send(allBizs);
                 hasReturnedData = true;
               }

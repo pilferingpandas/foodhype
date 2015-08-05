@@ -1,4 +1,5 @@
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+// Would be used in animations
+// var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 //////////////////////////
 /// React Views        ///
@@ -101,21 +102,6 @@ var WindowView = React.createClass({
     )
   }
 });
-
-// var LinkButton = React.createClass({
-//   render: function() {
-//     if(!this.props.url) {
-//       return (<span></span>)
-//     } else {
-//       return(
-//         <a href={this.props.url}><button className="linkButton" id={this.props.id}></button></a>
-//       )
-//     }
-//   }
-// });
-
-//<LinkButton url={this.props.data.yelpUrl} id={"yelp"} />
-
 
 // Renders the whole application
 React.render(
