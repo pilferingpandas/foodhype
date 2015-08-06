@@ -155,9 +155,10 @@ var userClickHandler = function() {
 var getRestaurants = function() {
   //Global variable for the array of restaurant markers
   window.markers = [];
+  console.log(window.user);
   var jsonData = {
-    'userLat': window.user.getPosition().A.toString() , 
-    'userLong': window.user.getPosition().F.toString()
+    'userLat': window.user.position.G.toString() , 
+    'userLong': window.user.position.K.toString()
   };
   $.ajax({
     type: "POST",

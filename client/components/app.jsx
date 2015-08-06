@@ -32,9 +32,7 @@ var AppView = React.createClass({
       <div id="wrapper">
         <h1 id="title">Food Hyped</h1>
         <input id="pac-input" className="controls" type="text" placeholder="Start typing here"></input>
-        <ReactCSSTransitionGroup transitionName="window" transitionAppear="true">
-          <WindowView data={this.state.selectedMarkerData} />
-        </ReactCSSTransitionGroup>
+        <WindowView data={this.state.selectedMarkerData} />
       </div>
     )
   }
@@ -85,7 +83,7 @@ var WindowView = React.createClass({
     if(this.props.data.display === false) {return(<div></div>);}
     console.log(this.props.data);
     var instagramPictureUrl = this.props.data.instagramPictureUrl ||
-      'http://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg';
+      'http://i.imgur.com/8SoMYyh.jpg';
     console.log(instagramPictureUrl);
     return (
       <div id="window">

@@ -46,7 +46,8 @@ app.post('/yelpresults', function(req, res) {
 
   var locationString = req.body.userLat+','+req.body.userLong;
 
-  // search san francisco for all food restaurants
+  console.log(locationString);
+  
   yelp.search({term: "food", ll: locationString, limit: returnNum}, function(error, data) {
     if (!error) {
 
