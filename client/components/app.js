@@ -82,7 +82,7 @@ var WindowView = React.createClass({displayName: "WindowView",
       var instagramPictureUrl = this.props.data.instagramPictureUrl ||
         'http://i.imgur.com/8SoMYyh.jpg';
       return (
-        React.createElement("div", {id: "window"}, 
+        React.createElement("div", {id: "window", className: "animated bounceInRight"}, 
           React.createElement("div", {id: "windowTitle"}, this.props.data.name), 
           React.createElement("img", {id: "windowPicture", src: instagramPictureUrl}), 
           React.createElement("div", null, "Its at ", this.props.data.address, " "), 

@@ -52,7 +52,10 @@ module.exports = function(grunt) {
     cssmin: {
       target: {
         files: {
-          './client/dist/style.min.css' : ['./client/styles/style.css']
+          './client/dist/style.min.css' : [
+          './client/styles/style.css', 
+          './client/styles/animate.css'
+          ]
         }
       }
     },
