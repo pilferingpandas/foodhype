@@ -55,7 +55,7 @@ var foodhypedMobile = React.createClass({
   componentDidMount: function() {
     console.log('mounted!');
     var that = this;
-    fetch('https://afternoon-cliffs-3448.herokuapp.com/yelpresults',{
+    fetch('https://food-hyped.herokuapp.com/yelpresults',{
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -73,10 +73,12 @@ var foodhypedMobile = React.createClass({
         .replace("\"", "'")
         .replace("'", '"');
       response = JSON.parse(response);
-      console.log(response.length);
       var resPins = [];
       for(var i = 0; i < response.length; i++) {
-        console.log(response[i]);
+        console.log('trying to add name ' + response[i].name);
+        console.log('trying to add score ' + response[i].score);
+        console.log('trying to add address ' + response[i].address[0]);
+        console.log('trying to add pic ' + response[i].instagramPictureUrl);
         resPins.push({
           title: response[i].name,
           score: response[i].score,
@@ -105,11 +107,15 @@ var RestaurantScroll = React.createClass({
       var clickHandler = function() {
         that.props.clickHandler(data);
       }
+      console.log('\nmaking a new thing!\n');
+      console.log(data);
       return (
         <View style={styles.restaurant}>
-          <Text onPress={clickHandler}>Name: {data.title}</Text>
-          <Text onPress={clickHandler}>Address: {data.address}</Text>
-          <Text onPress={clickHandler}>Score: {data.score}</Text>
+          <View style={{width:140,flex:1}}>
+            <Text onPress={clickHandler}>Name: {data.title}</Text>
+            <Text onPress={clickHandler}>Address: {data.address}</Text>
+            <Text onPress={clickHandler}>Score: {data.score}</Text>
+          </View>
           <Image style={styles.logo} source={{uri: data.imageUrl}} />
 
         </View>
@@ -127,7 +133,8 @@ var RestaurantScroll = React.createClass({
 
 var styles = StyleSheet.create({
   map: {
-    height: 400,
+    height: 395,
+    marginTop:25,
     margin: 10,
     borderWidth: 1,
     borderColor: '#000000',
@@ -135,9 +142,10 @@ var styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#6A85B1',
     top:8,
-    height: 140,
+    height: 143,
   },
   restaurant: {
+    flexDirection: 'row',
     margin:10,
     borderWidth: 1,
     borderColor: 'black',
@@ -149,8 +157,9 @@ var styles = StyleSheet.create({
     shadowRadius: 5,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 80,
+    height:80,
+    flex: 1
   }
 });
 

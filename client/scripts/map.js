@@ -126,6 +126,8 @@ if(navigator.geolocation) {
 }
 
 function handleNoGeolocation(errorFlag) {
+  $(document).trigger('loadedYelpData');
+
   if (errorFlag) {
     var content = 'Error: The Geolocation service failed.';
   } else {
@@ -155,7 +157,6 @@ var userClickHandler = function() {
 var getRestaurants = function() {
   //Global variable for the array of restaurant markers
   window.markers = [];
-  console.log(window.user);
   var jsonData = {
     'userLat': window.user.position.G.toString() , 
     'userLong': window.user.position.K.toString()
@@ -169,7 +170,6 @@ var getRestaurants = function() {
   }).done(  function(restaurantData) {
     restaurantData = JSON.parse(restaurantData);
 
-    console.log(restaurantData);
 
     var makeMarker = function(index) {
       var marker = new google.maps.Marker({
@@ -196,41 +196,14 @@ var getRestaurants = function() {
       makeMarker(i);
     }
 
-
-  // An attempt at animating pin drops.
-    // var makeMarkerWithTimeout = function(markerIndex) {
-    //   window.setTimeout(function() {
-    //     var marker = new google.maps.Marker({
-    //       map:map,
-    //       position:new google.maps.LatLng(restaurantData[markerIndex].latitude, restaurantData[markerIndex].longitude), 
-    //       animation: google.maps.Animation.DROP,
-    //       icon: '../images/ball-marker.png'
-    //     });
-
-    //     // Attach restaurant data to marker object
-    //     marker.data = restaurantData[markerIndex];
-
-    //     // Push to globally accessible markers array
-    //     window.markers.push(marker);
-
-    //     // Add clickhandler
-    //     google.maps.event.addListener(window.markers[markerIndex], 'click', markerClickHandler);    
-    //   }, timeout);
-    // }
-
-    // // Add markers to the map and push to the array.
-    // for(var i = 0; i < restaurantData.length; i++) {
-    //   makeMarkerWithTimeout(i, i*200);
-    // }
-
+    var element = document.getElementById("loadingWall");
+    element.parentNode.removeChild(element);
 
   }.bind(this)); 
 
   var markerClickHandler = function(e) {
-    console.log(window.markers);
     for(var i = 0; i < window.markers.length; i++) {
       if(e.latLng === window.markers[i].getPosition()) {
-        console.log(window.markers[i].data);
         $(document).trigger('markerClick', [window.markers[i].data]);
       }
     }

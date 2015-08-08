@@ -13,7 +13,7 @@ var AppView = React.createClass({
   handleMarkerClick: function(e, data) {
     //If the user clicks on a marker, update the state, which gets passed to the window view.
     this.setState({
-      selectedMarkerData:data
+      selectedMarkerData:data,
     });
     this.render();
   },
@@ -42,7 +42,7 @@ var WindowView = React.createClass({
   handleTwilioClick: function(){
 
 
-    var theDiv = $('<div id="twilioForm"><form method="post" action="">Enter phone number, dude...<br><input type="text" name="phoneNumber" id="phoneNumber"><input type="submit"></div>').hide().fadeIn(1500);
+    var theDiv = $('<div id="twilioForm"><form method="post" action="">Enter phone number (must be registered with twilio)<br><input type="text" name="phoneNumber" id="phoneNumber"><input type="submit"></div>').hide().fadeIn(1500);
     $("body").append(theDiv);
 
     var restName = this.props.data.name;
@@ -65,7 +65,6 @@ var WindowView = React.createClass({
         dataType: "text",
         contentType: "application/json",
         success: function(data) {
-          console.log('response',data);
           $("#twilioForm").fadeOut(1000, function() {
             $(this).remove();
           });
@@ -75,29 +74,27 @@ var WindowView = React.createClass({
         }
       })
     });
-
-
-    console.log('clicked twilio and awesome, tubular');
   },
   render: function() {
-    if(this.props.data.display === false) {return(<div></div>);}
-    console.log(this.props.data);
-    var instagramPictureUrl = this.props.data.instagramPictureUrl ||
-      'http://i.imgur.com/8SoMYyh.jpg';
-    console.log(instagramPictureUrl);
-    return (
-      <div id="window">
-        <div id="windowTitle">{this.props.data.name}</div>
-        <img id="windowPicture" src={instagramPictureUrl}></img>
-        <div>Its at {this.props.data.address} </div>
-        <div id="windowScore">{this.props.data.score}</div>
-        <a href={this.props.data.yelpUrl}><button className="linkButton" id="yelp"></button></a>
-        <a href={this.props.data.twitterUrl}><button className="linkButton" id="twitter"></button></a>
-        <a href={this.props.data.instagramUrl}><button className="linkButton" id="instagram"></button></a>
-        <a href={this.props.data.googlePlacesUrl}><button className="linkButton" id="googlePlaces"></button></a>
-        <a onClick={this.handleTwilioClick}><button className="linkButton" id="twilio"></button></a>
-      </div>
-    )
+    if(this.props.data.display === false) {
+      return(<div></div>);
+    } else {    
+      var instagramPictureUrl = this.props.data.instagramPictureUrl ||
+        'http://i.imgur.com/8SoMYyh.jpg';
+      return (
+        <div id="window">
+          <div id="windowTitle">{this.props.data.name}</div>
+          <img id="windowPicture" src={instagramPictureUrl}></img>
+          <div>Its at {this.props.data.address} </div>
+          <div id="windowScore">{this.props.data.score}</div>
+          <a href={this.props.data.yelpUrl}><button className="linkButton" id="yelp"></button></a>
+          <a href={this.props.data.twitterUrl}><button className="linkButton" id="twitter"></button></a>
+          <a href={this.props.data.instagramUrl}><button className="linkButton" id="instagram"></button></a>
+          <a href={this.props.data.googlePlacesUrl}><button className="linkButton" id="googlePlaces"></button></a>
+          <a onClick={this.handleTwilioClick}><button className="linkButton" id="twilio"></button></a>
+        </div>
+      )
+    }
   }
 });
 

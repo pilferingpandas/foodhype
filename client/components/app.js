@@ -13,7 +13,7 @@ var AppView = React.createClass({displayName: "AppView",
   handleMarkerClick: function(e, data) {
     //If the user clicks on a marker, update the state, which gets passed to the window view.
     this.setState({
-      selectedMarkerData:data
+      selectedMarkerData:data,
     });
     this.render();
   },
@@ -42,7 +42,7 @@ var WindowView = React.createClass({displayName: "WindowView",
   handleTwilioClick: function(){
 
 
-    var theDiv = $('<div id="twilioForm"><form method="post" action="">Enter phone number, dude...<br><input type="text" name="phoneNumber" id="phoneNumber"><input type="submit"></div>').hide().fadeIn(1500);
+    var theDiv = $('<div id="twilioForm"><form method="post" action="">Enter phone number (must be registered with twilio)<br><input type="text" name="phoneNumber" id="phoneNumber"><input type="submit"></div>').hide().fadeIn(1500);
     $("body").append(theDiv);
 
     var restName = this.props.data.name;
@@ -65,7 +65,6 @@ var WindowView = React.createClass({displayName: "WindowView",
         dataType: "text",
         contentType: "application/json",
         success: function(data) {
-          console.log('response',data);
           $("#twilioForm").fadeOut(1000, function() {
             $(this).remove();
           });
@@ -75,29 +74,27 @@ var WindowView = React.createClass({displayName: "WindowView",
         }
       })
     });
-
-
-    console.log('clicked twilio and awesome, tubular');
   },
   render: function() {
-    if(this.props.data.display === false) {return(React.createElement("div", null));}
-    console.log(this.props.data);
-    var instagramPictureUrl = this.props.data.instagramPictureUrl ||
-      'http://i.imgur.com/8SoMYyh.jpg';
-    console.log(instagramPictureUrl);
-    return (
-      React.createElement("div", {id: "window"}, 
-        React.createElement("div", {id: "windowTitle"}, this.props.data.name), 
-        React.createElement("img", {id: "windowPicture", src: instagramPictureUrl}), 
-        React.createElement("div", null, "Its at ", this.props.data.address, " "), 
-        React.createElement("div", {id: "windowScore"}, this.props.data.score), 
-        React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "yelp"})), 
-        React.createElement("a", {href: this.props.data.twitterUrl}, React.createElement("button", {className: "linkButton", id: "twitter"})), 
-        React.createElement("a", {href: this.props.data.instagramUrl}, React.createElement("button", {className: "linkButton", id: "instagram"})), 
-        React.createElement("a", {href: this.props.data.googlePlacesUrl}, React.createElement("button", {className: "linkButton", id: "googlePlaces"})), 
-        React.createElement("a", {onClick: this.handleTwilioClick}, React.createElement("button", {className: "linkButton", id: "twilio"}))
+    if(this.props.data.display === false) {
+      return(React.createElement("div", null));
+    } else {    
+      var instagramPictureUrl = this.props.data.instagramPictureUrl ||
+        'http://i.imgur.com/8SoMYyh.jpg';
+      return (
+        React.createElement("div", {id: "window"}, 
+          React.createElement("div", {id: "windowTitle"}, this.props.data.name), 
+          React.createElement("img", {id: "windowPicture", src: instagramPictureUrl}), 
+          React.createElement("div", null, "Its at ", this.props.data.address, " "), 
+          React.createElement("div", {id: "windowScore"}, this.props.data.score), 
+          React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "yelp"})), 
+          React.createElement("a", {href: this.props.data.twitterUrl}, React.createElement("button", {className: "linkButton", id: "twitter"})), 
+          React.createElement("a", {href: this.props.data.instagramUrl}, React.createElement("button", {className: "linkButton", id: "instagram"})), 
+          React.createElement("a", {href: this.props.data.googlePlacesUrl}, React.createElement("button", {className: "linkButton", id: "googlePlaces"})), 
+          React.createElement("a", {onClick: this.handleTwilioClick}, React.createElement("button", {className: "linkButton", id: "twilio"}))
+        )
       )
-    )
+    }
   }
 });
 
