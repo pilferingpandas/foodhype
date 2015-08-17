@@ -31,7 +31,7 @@ var AppView = React.createClass({displayName: "AppView",
     return (
       React.createElement("div", {id: "wrapper"}, 
         React.createElement("h1", {id: "title"}, "Food Hyped"), 
-        React.createElement("input", {id: "pac-input", className: "controls", type: "text", placeholder: "Start typing here"}), 
+        React.createElement("input", {id: "pac-input", className: "controls", type: "text", placeholder: "Search for a place on the map"}), 
         React.createElement(WindowView, {data: this.state.selectedMarkerData})
       )
     )
@@ -90,7 +90,6 @@ var WindowView = React.createClass({displayName: "WindowView",
           React.createElement("a", {href: this.props.data.yelpUrl}, React.createElement("button", {className: "linkButton", id: "yelp"})), 
           React.createElement("a", {href: this.props.data.twitterUrl}, React.createElement("button", {className: "linkButton", id: "twitter"})), 
           React.createElement("a", {href: this.props.data.instagramUrl}, React.createElement("button", {className: "linkButton", id: "instagram"})), 
-          React.createElement("a", {href: this.props.data.googlePlacesUrl}, React.createElement("button", {className: "linkButton", id: "googlePlaces"})), 
           React.createElement("a", {onClick: this.handleTwilioClick}, React.createElement("button", {className: "linkButton", id: "twilio"}))
         )
       )
