@@ -31,7 +31,7 @@ var AppView = React.createClass({
     return (
       <div id="wrapper">
         <h1 id="title">Food Hyped</h1>
-        <input id="pac-input" className="controls" type="text" placeholder="Start typing here"></input>
+        <input id="pac-input" className="controls" type="text" placeholder="Search for a place on the map"></input>
         <WindowView data={this.state.selectedMarkerData} />
       </div>
     )
@@ -90,7 +90,6 @@ var WindowView = React.createClass({
           <a href={this.props.data.yelpUrl}><button className="linkButton" id="yelp"></button></a>
           <a href={this.props.data.twitterUrl}><button className="linkButton" id="twitter"></button></a>
           <a href={this.props.data.instagramUrl}><button className="linkButton" id="instagram"></button></a>
-          <a href={this.props.data.googlePlacesUrl}><button className="linkButton" id="googlePlaces"></button></a>
           <a onClick={this.handleTwilioClick}><button className="linkButton" id="twilio"></button></a>
         </div>
       )
