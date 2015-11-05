@@ -1,6 +1,6 @@
 # Foodhyped
 
-A web and mobile app for finding popular restaurants around you. Foodhyped gets your geolocation and then calculates a "hype" score for restaurants in your area based on their twitter, google places, yelp and instagram popularity. If your phone number is verified by Twilio, you can have it send you the address of the restaurant.
+A web and mobile app for finding popular restaurants around you. Foodhyped obtains your geolocation and then calculates a "hype" score for restaurants in your area based on their twitter, google places, yelp and instagram popularity. If your phone number is verified by Twilio, you can have it send you the address of the restaurant.
 
 ### API keys
 The API keys are not uploaded to the GitHub. We recommend signing up at web addresses : https://instagram.com/developer/, https://dev.twitter.com/overview/documentation, https://developers.google.com/maps/signup and https://www.yelp.com/developers/documentation. API keys can be obtained free of charge.
