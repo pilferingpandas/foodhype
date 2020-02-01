@@ -1,6 +1,6 @@
 {
   "name": "foodhyped",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "serve-favicon": "^2.2.1",
     "twilio": "^2.2.1",
     "twitter": "^1.2.5",
-    "yelp": "^0.2.0"
+    "yelp": "^0.2.0",
+    "yelp-fusion": "^3.0.0"
   }
 }

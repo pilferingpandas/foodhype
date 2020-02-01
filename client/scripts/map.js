@@ -54,7 +54,7 @@ var searchBox = new google.maps.places.SearchBox(input);
 google.maps.event.addListener(searchBox, 'places_changed', function() {
 
   var places = searchBox.getPlaces();
-
+  console.log({ places: places  })
   if (places.length === 0) {
     return;
   }
@@ -158,8 +158,8 @@ var getRestaurants = function() {
   //Global variable for the array of restaurant markers
   window.markers = [];
   var jsonData = {
-    'userLat': window.user.position.G.toString() , 
-    'userLong': window.user.position.K.toString()
+    'userLat': window.user.position.lat() , 
+    'userLong': window.user.position.lng()
   };
   $.ajax({
     type: "POST",
@@ -170,7 +170,7 @@ var getRestaurants = function() {
   }).done(  function(restaurantData) {
     restaurantData = JSON.parse(restaurantData);
 
-
+    console.log(restaurantData)
     var makeMarker = function(index) {
       var marker = new google.maps.Marker({
         map:map,

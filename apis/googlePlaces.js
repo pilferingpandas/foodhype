@@ -1,7 +1,7 @@
 var keys = require('../config/panda-config.js');
 var GooglePlaces = require('google-places');
 var places = new GooglePlaces(keys.googleMap.map);
-
+console.log({ places, a: keys.googleMap.map })
 module.exports = {
   getApiData : function(thisRestaurant, callback ){
     var loc = [thisRestaurant.latitude, thisRestaurant.longitude];
